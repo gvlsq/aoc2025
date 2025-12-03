@@ -10,7 +10,7 @@ static inline int math_modi(int i, int m) {
     return result;
 }
 
-int day_1_part_1(FILE *file) {
+u64 day_1_part_1(FILE *file) {
     int dial_at = 50;
     int zero_count = 0;
 
@@ -37,7 +37,7 @@ int day_1_part_1(FILE *file) {
     return zero_count;
 }
 
-int day_1_part_2(FILE *file) {
+u64 day_1_part_2(FILE *file) {
     int dial_at = 50;
     int zero_count = 0;
 
