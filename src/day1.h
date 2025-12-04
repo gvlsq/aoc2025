@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#include "types.h"
+#include "shared.h"
 
 u64 day_1_part_1(FILE *file);
 u64 day_1_part_2(FILE *file);

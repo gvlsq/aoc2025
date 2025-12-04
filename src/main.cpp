@@ -3,10 +3,11 @@
 #include "day1.h"
 #include "day2.h"
 #include "day3.h"
-#include "types.h"
+#include "day4.h"
+#include "shared.h"
 
 int main(int argc, char **argv) {
-    FILE *file = fopen("data/input.txt", "rb");
+    FILE *file = fopen("data/input.txt", "r");
     if (!file) return 1;
 
     u64 solution = 0;
@@ -23,7 +24,13 @@ int main(int argc, char **argv) {
     solution = day_3_part_1(file);
 #elif DAY_3_PART_2
     solution = day_3_part_2(file);
+#elif DAY_4_PART_1
+    solution = day_4_part_1(file);
+#elif DAY_4_PART_2
+    solution = day_4_part_2(file);
 #endif
+
+    fclose(file);
 
     printf("Solution: %I64u\n", solution);
 

@@ -5,11 +5,14 @@
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\day2.cpp" />
     <ClCompile Include="..\..\src\day3.cpp" />
+    <ClCompile Include="..\..\src\day4.cpp" />
+    <ClCompile Include="..\..\src\shared.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\day1.h" />
     <ClInclude Include="..\..\src\day2.h" />
-    <ClInclude Include="..\..\src\types.h" />
+    <ClInclude Include="..\..\src\shared.h" />
     <ClInclude Include="..\..\src\day3.h" />
+    <ClInclude Include="..\..\src\day4.h" />
   </ItemGroup>
 </Project>
