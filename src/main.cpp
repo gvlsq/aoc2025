@@ -2,6 +2,7 @@
 
 #include "day1.h"
 #include "day2.h"
+#include "day3.h"
 #include "types.h"
 
 int main(int argc, char **argv) {
@@ -18,6 +19,10 @@ int main(int argc, char **argv) {
     solution = day_2_part_1(file);
 #elif DAY_2_PART_2
     solution = day_2_part_2(file);
+#elif DAY_3_PART_1
+    solution = day_3_part_1(file);
+#elif DAY_3_PART_2
+    solution = day_3_part_2(file);
 #endif
 
     printf("Solution: %I64u\n", solution);
