@@ -4,6 +4,7 @@
 #include "day2.h"
 #include "day3.h"
 #include "day4.h"
+#include "day5.h"
 #include "shared.h"
 
 int main(int argc, char **argv) {
@@ -28,6 +29,10 @@ int main(int argc, char **argv) {
     solution = day_4_part_1(file);
 #elif DAY_4_PART_2
     solution = day_4_part_2(file);
+#elif DAY_5_PART_1
+    solution = day_5_part_1(file);
+#elif DAY_5_PART_2
+    solution = day_5_part_2(file);
 #endif
 
     fclose(file);
