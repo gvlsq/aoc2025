@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DisableSpecificWarnings>6031;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +133,7 @@
     <ClCompile Include="..\..\src\day3.cpp" />
     <ClCompile Include="..\..\src\day4.cpp" />
     <ClCompile Include="..\..\src\day5.cpp" />
+    <ClCompile Include="..\..\src\day6.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\shared.cpp" />
   </ItemGroup>
@@ -141,6 +143,7 @@
     <ClInclude Include="..\..\src\day3.h" />
     <ClInclude Include="..\..\src\day4.h" />
     <ClInclude Include="..\..\src\day5.h" />
+    <ClInclude Include="..\..\src\day6.h" />
     <ClInclude Include="..\..\src\shared.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

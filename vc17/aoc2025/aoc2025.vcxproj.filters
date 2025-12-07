@@ -8,6 +8,7 @@
     <ClCompile Include="..\..\src\day4.cpp" />
     <ClCompile Include="..\..\src\shared.cpp" />
     <ClCompile Include="..\..\src\day5.cpp" />
+    <ClCompile Include="..\..\src\day6.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\day1.h" />
@@ -16,5 +17,6 @@
     <ClInclude Include="..\..\src\day3.h" />
     <ClInclude Include="..\..\src\day4.h" />
     <ClInclude Include="..\..\src\day5.h" />
+    <ClInclude Include="..\..\src\day6.h" />
   </ItemGroup>
 </Project>
