@@ -4,73 +4,6 @@
 
 #include "day4.h"
 
-#pragma region Character Grid
-
-struct Character_Grid {
-    int width;
-    int height;
-    s8 *data;
-};
-
-static void character_grid_init(Character_Grid *grid, FILE *file) {
-    const char *file_text = read_open_text_file(file);
-    int file_text_length = strlen(file_text);
-
-    grid->width  = 136;
-    grid->height = 136;
-
-    // Read characters into Character_Grid::data.
-    size_t stride = sizeof(*grid->data)*grid->width;
-
-    grid->data = (s8 *)malloc(stride*grid->height);
-
-    fseek(file, 0, SEEK_SET);
-
-    u8 *dest = (u8 *)grid->data;
-
-    char tmp[136 + 1];
-    while (fscanf(file, "%s\n", tmp) == 1) {
-        s8 *row = (s8 *)dest;
-        for (int i = 0; i < grid->width; i++) {
-            row[i] = tmp[i];
-        }
-
-        dest += stride;
-    }
-}
-
-static void character_grid_set_char(Character_Grid *grid,
-                                    int x, int y,
-                                    char c) {
-    size_t stride = sizeof(*grid->data)*grid->width;
-
-    *(s8 *)((u8 *)grid->data + y*stride + x) = c;
-}
-
-char character_grid_get_char(Character_Grid *grid,
-                             int x, int y,
-                             int xoffset = 0, int yoffset = 0) {
-    char result = '.';
-
-    x += xoffset;
-
-    if (x < 0)            return result;
-    if (x >= grid->width) return result;
-
-    y += yoffset;
-
-    if (y < 0)             return result;
-    if (y >= grid->height) return result;
-
-    size_t stride = sizeof(*grid->data)*grid->width;
-
-    result = *(s8 *)((u8 *)grid->data + y*stride + x);
-
-    return result;
-}
-
-#pragma endregion
-
 static u64 count_forkliftable_rolls(Character_Grid *character_grid) {
     u64 result = 0;
 
@@ -148,7 +81,7 @@ static void remove_forkliftable_rolls(Character_Grid *src_character_grid,
 
 u64 day_4_part_1(FILE *file) {
     Character_Grid character_grid;
-    character_grid_init(&character_grid, file);
+    character_grid_init(&character_grid, file, 136, 136);
 
     u64 result = count_forkliftable_rolls(&character_grid);
 
@@ -159,10 +92,10 @@ u64 day_4_part_2(FILE *file) {
     u64 result = 0;
 
     Character_Grid character_grid;
-    character_grid_init(&character_grid, file);
+    character_grid_init(&character_grid, file, 136, 136);
     
     Character_Grid tmp_grid;
-    character_grid_init(&tmp_grid, file);
+    character_grid_init(&tmp_grid, file, 136, 136);
 
     for (;;) {
         memcpy(tmp_grid.data, character_grid.data, sizeof(s8)*character_grid.width*character_grid.height);

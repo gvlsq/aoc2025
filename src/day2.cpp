@@ -3,14 +3,14 @@
 #include "day2.h"
 
 bool get_char_at(u64 number, int index, char *result) {
-    if (number < (u64)powf((float)10, index)) {
+    if (number < (u64)powf((float)10, (float)index)) {
         return false;
     }
 
-    u64 dividend = number % (u64)powf((float)10, index + 1);
-    u64 divisor = dividend / (u64)powf((float)10, index);
+    u64 dividend = number % (u64)powf((float)10, (float)(index + 1));
+    u64 divisor = dividend / (u64)powf((float)10, (float)index);
 
-    *result = '0' + divisor;
+    *result = (char)('0' + divisor);
 
     return true;
 }
