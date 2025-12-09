@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
     solution = day_6_part_1(file);
 #elif DAY_6_PART_2
     solution = day_6_part_2(file);
-#elif DAY_7_PART_1 || 1
+#elif DAY_7_PART_1
     solution = day_7_part_1(file);
 #elif DAY_7_PART_2
     solution = day_7_part_2(file);
