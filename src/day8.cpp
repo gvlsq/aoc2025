@@ -4,8 +4,6 @@
 
 #include "day8.h"
 
-#define array_count(a) (sizeof((a)) / sizeof((a)[0]))
-
 struct Vector3u {
     u64 x;
     u64 y;

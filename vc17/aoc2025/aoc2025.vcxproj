@@ -136,6 +136,7 @@
     <ClCompile Include="..\..\src\day6.cpp" />
     <ClCompile Include="..\..\src\day7.cpp" />
     <ClCompile Include="..\..\src\day8.cpp" />
+    <ClCompile Include="..\..\src\day9.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\shared.cpp" />
   </ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="..\..\src\day6.h" />
     <ClInclude Include="..\..\src\day7.h" />
     <ClInclude Include="..\..\src\day8.h" />
+    <ClInclude Include="..\..\src\day9.h" />
     <ClInclude Include="..\..\src\shared.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

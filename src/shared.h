@@ -1,7 +1,11 @@
 #ifndef AOC_2025_SHARED_H
 #define AOC_2025_SHARED_H
 
+#include <assert.h>
+#include <float.h> // FLT_*, DBL_*
 #include <stdint.h>
+
+#define array_count(a) (sizeof((a)) / sizeof((a)[0]))
 
 typedef int8_t s8;
 
