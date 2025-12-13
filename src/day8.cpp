@@ -26,14 +26,14 @@ struct Circuit {
     Circuit_State state;
 
     int direct_connection_count;
-    Direct_Connection direct_connections[1000];
+    Direct_Connection direct_connections[10000];
 
     int junction_box_count;
-    Junction_Box *junction_boxes[1000];
+    Junction_Box *junction_boxes[10000];
 };
 
 static int junction_box_count;
-static Junction_Box junction_boxes[1000];
+static Junction_Box junction_boxes[10000];
 
 static Circuit circuits[1000];
 
@@ -120,7 +120,7 @@ static void connect_junction_boxes(Junction_Box *a, Junction_Box *b) {
     // Add all of circuit B's other direct connections to circuit A.
     for (int i = 0; i < circuit_b->direct_connection_count; i++) {
         Direct_Connection *existing_connection = &circuit_b->direct_connections[i];
-        
+
         add_direct_connection(circuit_a, existing_connection->a, existing_connection->b);
     }
 
@@ -187,7 +187,7 @@ u64 day_8_part_1(FILE *file) {
                 }
             }
         }
-       
+
         assert(amin && bmin);
 
         connect_junction_boxes(amin, bmin);
@@ -234,8 +234,82 @@ u64 day_8_part_1(FILE *file) {
     return result;
 }
 
+static int get_circuit_count(void) {
+    int result = 0;
+
+    for (int i = 0; i < array_count(circuits); i++) {
+        Circuit *circuit = &circuits[i];
+        if (circuit->state == CIRCUIT_STATE_INACTIVE) continue;
+
+        result++;
+    }
+
+    return result;
+}
+
 u64 day_8_part_2(FILE *file) {
     u64 result = 0;
+
+    // Parse in junction boxes.
+    {
+        int junction_box_index = 0;
+        bool parsing = true;
+        while (parsing) {
+            u64 x;
+            u64 y;
+            u64 z;
+            if (fscanf(file, "%I64u,%I64u,%I64u\n", &x, &y, &z) == 3) {
+                junction_boxes[junction_box_index++] = {{x, y, z}};
+            } else {
+                parsing = false;
+            }
+        }
+
+        junction_box_count = junction_box_index;
+    }
+
+    // Set up initial circuits and the junction boxes inside of them.
+    for (int i = 0; i < junction_box_count; i++) {
+        Circuit *circuit = &circuits[i];
+        circuit->state = CIRCUIT_STATE_ACTIVE;
+
+        add_junction_box(circuit, &junction_boxes[i]);
+
+        assert(circuit->direct_connection_count == 0);
+    }
+
+    // Connect junction box pairs.
+    Junction_Box *amin = 0;
+    Junction_Box *bmin = 0;
+
+    while (get_circuit_count() != 1) {
+        double dmin = DBL_MAX;
+
+        for (int i = 0; i < junction_box_count - 1; i++) {
+            Junction_Box *a = &junction_boxes[i];
+
+            for (int j = i + 1; j < junction_box_count; j++) {
+                Junction_Box *b = &junction_boxes[j];
+
+                double d = sqrt((double)squareu(a->position.x - b->position.x) +
+                                (double)squareu(a->position.y - b->position.y) +
+                                (double)squareu(a->position.z - b->position.z));
+                if (d < dmin) {
+                    bool directly_connected = test_direct_connection(a, b);
+                    if (directly_connected) continue;
+
+                    amin = a;
+                    bmin = b;
+
+                    dmin = d;
+                }
+            }
+        }
+
+        connect_junction_boxes(amin, bmin);
+    }
+
+    result = amin->position.x*bmin->position.x;
 
     return result;
 }
