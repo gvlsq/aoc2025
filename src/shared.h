@@ -3,7 +3,10 @@
 
 #include <assert.h>
 #include <float.h> // FLT_*, DBL_*
+#include <math.h>
 #include <stdint.h>
+#include <stdlib.h> // malloc
+#include <string.h> // _strdup
 
 #define array_count(a) (sizeof((a)) / sizeof((a)[0]))
 
@@ -25,7 +28,7 @@ void character_grid_init(Character_Grid *grid, FILE *file, int grid_width, int g
 
 void character_grid_print(Character_Grid *grid);
 
-void character_grid_set_char(Character_Grid *grid, int x, int y, char c);
+bool character_grid_set_char(Character_Grid *grid, int x, int y, char c);
 char character_grid_get_char(Character_Grid *grid, int x, int y, int xoffset = 0, int yoffset = 0);
 
 #endif

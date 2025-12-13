@@ -29,9 +29,6 @@ const char *read_open_text_file(FILE *file) {
 #pragma region Character Grid
 
 void character_grid_init(Character_Grid *grid, FILE *file, int grid_width, int grid_height) {
-    const char *file_text = read_open_text_file(file);
-    int file_text_length = strlen(file_text);
-
     grid->width  = grid_width;
     grid->height = grid_height;
 
@@ -40,20 +37,28 @@ void character_grid_init(Character_Grid *grid, FILE *file, int grid_width, int g
 
     grid->data = (s8 *)malloc(stride*grid->height);
 
-    fseek(file, 0, SEEK_SET);
+    if (file) {
+        fseek(file, 0, SEEK_SET);
 
-    u8 *dest = (u8 *)grid->data;
+        u8 *dest = (u8 *)grid->data;
 
-    char tmp[141 + 1]; // Used to be 136
-    assert(sizeof(tmp) > grid_width);
+        char tmp[141 + 1];
+        assert(sizeof(tmp) > grid_width);
 
-    while (fscanf(file, "%s\n", tmp) == 1) {
-        s8 *row = (s8 *)dest;
-        for (int i = 0; i < grid->width; i++) {
-            row[i] = tmp[i];
+        while (fscanf(file, "%s\n", tmp) == 1) {
+            s8 *row = (s8 *)dest;
+            for (int i = 0; i < grid->width; i++) {
+                row[i] = tmp[i];
+            }
+
+            dest += stride;
         }
-
-        dest += stride;
+    } else {
+        for (u64 y = 0; y < grid_height; y++) {
+            for (u64 x = 0; x < grid_width; x++) {
+                grid->data[grid_width*y + x] = '.';
+            }
+        }
     }
 }
 
@@ -66,18 +71,20 @@ void character_grid_print(Character_Grid *grid) {
     }
 }
 
-void character_grid_set_char(Character_Grid *grid,
+bool character_grid_set_char(Character_Grid *grid,
                              int x, int y,
                              char c) {
-    assert(x >= 0);
-    assert(x < grid->width);
+    if (x < 0)            return false;
+    if (x >= grid->width) return false;
 
-    assert(y >= 0);
-    assert(y < grid->height);
+    if (y < 0)             return false;
+    if (y >= grid->height) return false;
 
     size_t stride = sizeof(*grid->data)*grid->width;
 
     *(s8 *)((u8 *)grid->data + y*stride + x) = c;
+
+    return true;
 }
 
 char character_grid_get_char(Character_Grid *grid,
