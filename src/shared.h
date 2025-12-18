@@ -10,9 +10,12 @@
 
 #define array_count(a) (sizeof((a)) / sizeof((a)[0]))
 
+#define Invalid_Code_Path assert(!"Invalid code path")
+
 typedef int8_t s8;
 
 typedef uint8_t u8;
+typedef uint16_t u16;
 typedef uint64_t u64;
 
 struct Character_Grid {
@@ -25,6 +28,7 @@ const char *read_open_text_file(FILE *file);
 
 // Character grid
 void character_grid_init(Character_Grid *grid, FILE *file, int grid_width, int grid_height);
+void character_grid_deinit(Character_Grid *grid);
 
 void character_grid_print(Character_Grid *grid);
 

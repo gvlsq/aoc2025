@@ -62,6 +62,10 @@ void character_grid_init(Character_Grid *grid, FILE *file, int grid_width, int g
     }
 }
 
+void character_grid_deinit(Character_Grid *grid) {
+    free(grid->data);
+}
+
 void character_grid_print(Character_Grid *grid) {
     for (int y = 0; y < grid->height; y++) {
         for (int x = 0; x < grid->width; x++) {
